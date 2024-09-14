@@ -44,8 +44,17 @@ class CartView extends StatelessWidget {
                         return CartCard(
                           product: product,
                           onDelete: () => cubit.deleteProduct(product),
-                          onIncrease: () {},
-                          onDecrease: () {},
+                          onIncrease: () {
+                            product.quantity++;
+                            cubit.updateProduct(value: product);
+                          },
+                          onDecrease: () {
+                            if (product.quantity <= 1) {
+                              return;
+                            }
+                            product.quantity--;
+                            cubit.updateProduct(value: product);
+                          },
                         );
                       },
                       separatorBuilder: (context, index) => Divider(height: 40),

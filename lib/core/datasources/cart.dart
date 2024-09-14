@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:ecommerce_app/core/caching_utils/caching_utils.dart';
 import 'package:ecommerce_app/core/network_utils/network_utils.dart';
 import 'package:ecommerce_app/widgets/app_snack_bar.dart';
 
@@ -9,7 +10,7 @@ class CartDatasource {
     try {
       final response = await NetworkUtils.post(
         'carts',
-        formData: FormData.fromMap({'product_id': id}),
+        data: FormData.fromMap({'product_id': id}),
       );
       final success = (response.statusCode ?? 0) <= 299;
       showSnackBar(
@@ -28,8 +29,11 @@ class CartDatasource {
       if (success) {
         return Cart.fromJson(response.data['data']);
       }
-      showSnackBar(response.data['message'], isError: true,);
-    } catch(_) {}
+      showSnackBar(
+        response.data['message'],
+        isError: true,
+      );
+    } catch (_) {}
     return null;
   }
 
@@ -39,10 +43,29 @@ class CartDatasource {
       final success = (response.statusCode ?? 0) <= 299;
       showSnackBar(
         response.data['message'],
-        isError: true,
+        isError: !success,
       );
       return success;
-    } catch(_) {}
+    } catch (_) {}
+    return false;
+  }
+
+  Future<bool> updateProduct({
+    required int cartID,
+    required int quantity,
+  }) async {
+    try {
+      final response = await NetworkUtils.put(
+        'carts/$cartID',
+        data: {'quantity': quantity},
+      );
+      final success = (response.statusCode ?? 0) <= 299;
+      showSnackBar(
+        response.data['message'],
+        isError: !success,
+      );
+      return success;
+    } catch (_) {}
     return false;
   }
 }

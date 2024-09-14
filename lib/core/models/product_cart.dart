@@ -2,7 +2,7 @@ import 'package:ecommerce_app/core/models/product.dart';
 
 class ProductCart {
   final int id;
-  final int quantity;
+  int quantity;
   final Product product;
 
   ProductCart({

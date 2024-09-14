@@ -28,6 +28,16 @@ class CartCubit extends Cubit<CartStates> {
     getCart(isLoading: false);
   }
 
+  Future<void> updateProduct({
+    required ProductCart value,
+  }) async {
+    await _datasource.updateProduct(
+      quantity: value.quantity,
+      cartID: value.id,
+    );
+    getCart(isLoading: false);
+  }
+
   void _emit(CartStates state) {
     if (!isClosed) {
       emit(state);

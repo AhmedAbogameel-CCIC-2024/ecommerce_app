@@ -21,33 +21,33 @@ abstract class NetworkUtils {
     return _dio.get(path);
   }
 
-  static Future<Response> post(String path, {FormData? formData}) async {
+  static Future<Response> post(String path, {dynamic data}) async {
     if (CachingUtils.isLogged) {
       _dio.options.headers.addAll({'Authorization': CachingUtils.user!.token});
     }
     return _dio.post(
       path,
-      data: formData,
+      data: data,
     );
   }
 
-  static Future<Response> put(String path, {FormData? formData}) async {
+  static Future<Response> put(String path, {dynamic data}) async {
     if (CachingUtils.isLogged) {
       _dio.options.headers.addAll({'Authorization': CachingUtils.user!.token});
     }
     return _dio.put(
       path,
-      data: formData,
+      data: data,
     );
   }
 
-  static Future<Response> delete(String path, {FormData? formData}) async {
+  static Future<Response> delete(String path, {dynamic data}) async {
     if (CachingUtils.isLogged) {
       _dio.options.headers.addAll({'Authorization': CachingUtils.user!.token});
     }
     return _dio.delete(
       path,
-      data: formData,
+      data: data,
     );
   }
 }

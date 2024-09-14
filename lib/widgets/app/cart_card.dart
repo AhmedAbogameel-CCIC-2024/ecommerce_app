@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../core/utils/colors.dart';
 import '../app_text.dart';
 
-class CartCard extends StatelessWidget {
+class CartCard extends StatefulWidget {
   const CartCard({
     Key? key,
     required this.product,
@@ -19,16 +19,21 @@ class CartCard extends StatelessWidget {
   final void Function() onDelete;
 
   @override
+  State<CartCard> createState() => _CartCardState();
+}
+
+class _CartCardState extends State<CartCard> {
+  @override
   Widget build(BuildContext context) {
     return Dismissible(
-      key: Key('${product.id}'),
+      key: Key('${widget.product.id}'),
       onDismissed: (direction) {
-        onDelete();
+        widget.onDelete();
       },
       child: Row(
         children: [
           Image.network(
-            product.product.image,
+            widget.product.product.image,
             height: 64,
             width: 64,
           ),
@@ -38,7 +43,7 @@ class CartCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 AppText(
-                  title: product.product.name,
+                  title: widget.product.product.name,
                   fontWeight: FontWeight.w700,
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
@@ -48,12 +53,15 @@ class CartCard extends StatelessWidget {
                   children: [
                     Expanded(
                       child: AppText(
-                        title: '${product.product.price} EGP',
+                        title: '${widget.product.product.price} EGP',
                         color: AppColors.orange,
                       ),
                     ),
                     InkWell(
-                      onTap: onDecrease,
+                      onTap: () {
+                        widget.onDecrease();
+                        setState(() {});
+                      },
                       child: CircleAvatar(
                         backgroundColor: AppColors.primary,
                         radius: 16,
@@ -64,13 +72,16 @@ class CartCard extends StatelessWidget {
                       ),
                     ),
                     AppText(
-                      title: '${product.quantity}',
+                      title: '${widget.product.quantity}',
                       fontWeight: FontWeight.w700,
                       padding: EdgeInsets.symmetric(horizontal: 16),
                       fontSize: 20,
                     ),
                     InkWell(
-                      onTap: onIncrease,
+                      onTap: () {
+                        widget.onIncrease();
+                        setState(() {});
+                      },
                       child: CircleAvatar(
                         backgroundColor: AppColors.primary,
                         radius: 16,

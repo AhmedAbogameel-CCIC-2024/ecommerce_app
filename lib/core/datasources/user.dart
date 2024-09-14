@@ -29,7 +29,7 @@ class UserDatasource {
         );
       final response = await NetworkUtils.post(
         'register',
-        formData: formData,
+        data: formData,
       );
       final success = response.data['status'] == true;
       if (success) {
@@ -52,7 +52,7 @@ class UserDatasource {
     try {
       final response = await NetworkUtils.post(
         'login',
-        formData: FormData.fromMap({
+        data: FormData.fromMap({
           "email": email,
           "password": password
         }),
