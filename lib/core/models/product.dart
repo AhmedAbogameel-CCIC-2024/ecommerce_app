@@ -6,7 +6,7 @@ class Product {
   final String name;
   final String description;
   final bool inFavourite;
-  final bool inCart;
+  bool inCart;
 
   Product({
     required this.id,
