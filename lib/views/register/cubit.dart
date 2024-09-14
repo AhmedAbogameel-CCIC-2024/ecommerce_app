@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../home/view.dart';
+import '../nav_bar/view.dart';
 
 part 'states.dart';
 
@@ -39,7 +40,7 @@ class RegisterCubit extends Cubit<RegisterStates> {
     );
     emit(RegisterInit());
     if (result) {
-      RouteUtils.pushAndRemoveAll(HomeView());
+      RouteUtils.pushAndRemoveAll(NavBarView());
     }
   }
 

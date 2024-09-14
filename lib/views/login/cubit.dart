@@ -4,6 +4,8 @@ import 'package:ecommerce_app/views/home/view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../nav_bar/view.dart';
+
 part 'states.dart';
 
 class LoginCubit extends Cubit<LoginStates> {
@@ -25,7 +27,7 @@ class LoginCubit extends Cubit<LoginStates> {
     );
     emit(LoginInit());
     if (result) {
-      RouteUtils.pushAndRemoveAll(HomeView());
+      RouteUtils.pushAndRemoveAll(NavBarView());
     }
   }
 }

@@ -19,18 +19,18 @@ class HomeCubit extends Cubit<HomeStates> {
   List<Product> products = [];
 
   Future<void> getCategories() async {
-    emit(HomeCategoriesLoading());
+    _emit(HomeCategoriesLoading());
     categories = await _datasource.getCategories();
     selectedCategory = categories.first;
     getProducts();
-    emit(HomeInit());
+    _emit(HomeInit());
   }
 
   Future<void> getProducts() async {
     products.clear();
-    emit(HomeProductsLoading());
+    _emit(HomeProductsLoading());
     products = await _datasource.getProducts(categoryID: selectedCategory!.id);
-    emit(HomeInit());
+    _emit(HomeInit());
   }
 
   void selectCategory(ProductCategory value) {
@@ -39,5 +39,12 @@ class HomeCubit extends Cubit<HomeStates> {
     }
     selectedCategory = value;
     getProducts();
+  }
+
+
+  void _emit(HomeStates state) {
+    if (!isClosed) {
+      emit(state);
+    }
   }
 }

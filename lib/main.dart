@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 
 import 'core/caching_utils/caching_utils.dart';
 import 'core/network_utils/network_utils.dart';
+import 'views/nav_bar/view.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -22,7 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       navigatorKey: RouteUtils.navigatorKey,
-      home: CachingUtils.isLogged ? HomeView() : LoginView(),
+      home: CachingUtils.isLogged ? NavBarView() : LoginView(),
     );
   }
 }
