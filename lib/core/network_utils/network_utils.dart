@@ -9,6 +9,7 @@ abstract class NetworkUtils {
     _dio.options = BaseOptions(
       baseUrl: "https://student.valuxapps.com/api/",
       validateStatus: (status) => true,
+      headers: {'lang': 'en'}
     );
   }
 
