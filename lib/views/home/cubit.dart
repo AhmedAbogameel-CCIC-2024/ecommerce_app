@@ -22,8 +22,8 @@ class HomeCubit extends Cubit<HomeStates> {
     _emit(HomeCategoriesLoading());
     categories = await _datasource.getCategories();
     selectedCategory = categories.first;
-    getProducts();
     _emit(HomeInit());
+    getProducts();
   }
 
   Future<void> getProducts() async {
